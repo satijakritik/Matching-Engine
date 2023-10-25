@@ -44,4 +44,4 @@ named `<input_file_name>_<instrument>_orderbook.csv`
 1. The orderID is unique for the orderbook of every instrument (and not unique for all instruments). This means that a BTC/USDT orderbook and ETH/USDT orderbook can have an order with the same orderID
 2. The orderbook displays the top 5 bids and top 5 asks. To change this, update the value of the `depth` field in the Orderbook class
 3. The program has not been dockerized, and may not work on all systems. It has been tested on the 2.4 GHz Quad-Core Intel Core i5 2019 MacBook Pro.
-4. Large volume of orders has been assumed to be ~20,000 orders. The file `input_test_3.txt` has ~20,000 orders and runs in ~35s
+4. Large volume of orders has been assumed to be ~20,000 orders. The file `input_test_3.txt` has ~20,000 orders and runs in ~1.8s. Thus, it takes ~90μs for processing an order.
