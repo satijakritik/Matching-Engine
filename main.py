@@ -126,7 +126,7 @@ def main():
             for line in lines:
                 line = line.split(" ")
                 commands = ["buy", "sell", "cancel"]
-                print(line)
+                # print(line)
                 cmd = line[0].lower()
                 
                 if cmd not in commands:
@@ -151,8 +151,6 @@ def main():
                         
                         if incoming_order:
                             matching_engine.process_order(incoming_order)
-                            
-                        print(matching_engine.orderbooks[instrument])
                         
                     case "sell":
                         if len(line) != 4:
@@ -171,8 +169,6 @@ def main():
                         
                         if incoming_order:
                             matching_engine.process_order(incoming_order)
-                            
-                        print(matching_engine.orderbooks[instrument])
                         
                     case "cancel":
                         if len(line) != 3:
@@ -181,8 +177,11 @@ def main():
                         
                         instrument = line[1]
                         order_id = int(line[2])
+                        
+                        if instrument not in matching_engine.orderbooks:
+                            print("Order does not exist")
+                            
                         matching_engine.cancel_order(instrument, order_id)
-                        print(matching_engine.orderbooks[instrument])
             
             end_time = perf_counter()
             
@@ -192,14 +191,14 @@ def main():
                 
                 df = orderbook.create_df()
                 
-                if instrument not in matching_engine.trades:
-                    matching_engine.trades[instrument] = []
+                if instrument not in matching_engine.trade_history:
+                    matching_engine.trade_history[instrument] = []
                 
                 print()
                 print(instrument)
                 print(df.head())
                 print()
-                print(f"Trades: {matching_engine.trades[instrument]}")
+                # print(f"Trades: {matching_engine.trade_history[instrument]}")
                 print()
                     
                 with open(output_file, "w+") as f:
