@@ -44,12 +44,12 @@ class OrderBook:
             "Bid_q": [],
         }
 
-        for ask in self.asks[self.depth::-1]:
+        for ask in self.asks[self.depth + 1::-1]:
             data["Ask_id"].append(ask.order_id)
             data["Ask_p"].append(ask.price)
             data["Ask_q"].append(ask.quantity)
 
-        for bid in self.bids[self.depth::-1]:
+        for bid in self.bids[self.depth + 1::-1]:
             data["Bid_id"].append(bid.order_id)
             data["Bid_p"].append(bid.price)
             data["Bid_q"].append(bid.quantity)
@@ -78,13 +78,13 @@ class OrderBook:
         lines.append("\nAsks:")
         lines.append("Order ID\tPrice\tQuantity")
         
-        for ask in self.asks[self.depth::-1]:
+        for ask in self.asks[self.depth + 1::-1]:
             lines.append(str(ask.order_id) + "\t\t" + str(ask))
         
         lines.append("\nBids:")
         lines.append("Order ID\tPrice\tQuantity")
         
-        for bid in self.bids[self.depth::-1]:
+        for bid in self.bids[self.depth + 1::-1]:
             lines.append(str(bid.order_id) + "\t\t" + str(bid))
             
         lines.append("-"*34 + "-" * len(self.instrument))
